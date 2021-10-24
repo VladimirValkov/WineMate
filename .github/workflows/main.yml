@@ -25,8 +25,8 @@ jobs:
 
       - uses: up9cloud/action-rsync@master
         env:
-          USER: teamppmg
-          HOST: 49.12.215.254
+          USER: ${{secrets.USER_1}}
+          HOST: ${{secrets.HOST_1}}
           KEY: ${{secrets.KEY_1}}
           SOURCE : ./test/
           TARGET: ~/project/
