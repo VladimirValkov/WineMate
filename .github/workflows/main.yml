@@ -28,4 +28,5 @@ jobs:
           USER: teamppmg
           HOST: 49.12.215.254
           KEY: ${{secrets.KEY_1}}
+          SOURCE : ./test/
           TARGET: ~/project/
