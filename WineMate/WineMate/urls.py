@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from table.views import TableListView
 
 urlpatterns = [
+    path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('table/', include('table.urls')),
     path('home/', include('home.urls')),
