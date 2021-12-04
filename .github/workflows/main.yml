@@ -26,5 +26,5 @@ jobs:
           USER: ${{secrets.USER_1}}
           HOST: ${{secrets.HOST_1}}
           KEY: ${{secrets.KEY_1}}
-          SOURCE : ./test/
+          SOURCE : ./WineMate/
           TARGET: ~/project/
