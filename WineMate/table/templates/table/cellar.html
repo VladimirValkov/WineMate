@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% load render_table from django_tables2 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изба</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="navbar">
+
+</div>
+
+<div class="px-3">
+    {% render_table table %}
+    <form action="{% url 'cellar' %}" method="POST" class="px-3">
+        {% csrf_token %}
+        <input type="hidden" name="cellar_operation">
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inputAssortmentName">Асортимент:</label>
+                <input class="form-control" id="assort" type="text" placeholder="Bolgare Chardonnay"
+                       name="assortment_name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAssortmentYear">Година:</label>
+                <select class="form-control" name="year" id="assortyear">
+                    <option>-----</option>
+                    <option>{% now 'Y' %}</option>
+                    {% for i in years %}
+                        <option>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inputStage">Етап:</label>
+                <input class="form-control" type="text" name="stage">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputNote">Забележка:</label>
+                <input class="form-control" type="text" name="note">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inputAlcohol">Алкохол:</label>
+                <input class="form-control" type="text" name="alcohol">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputSugar">Захар:</label>
+                <input class="form-control" type="text" name="sugar">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputTK">Титруеми киселини:</label>
+                <input class="form-control" type="text" name="titr_acids">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPH">pH:</label>
+                <input class="form-control" type="text" name="pH">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputVolAcids">Летливи киселини:</label>
+                <input class="form-control" type="text" name="vol_acids">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputRelWeights">Относително тегло:</label>
+                <input class="form-control" type="text" name="rel_weight">
+            </div>
+            <div class="form-group col-md-4" id="mal_acids">
+                <label for="inputMalWeights">Ябълчна киселина:</label>
+                <input class="form-control" type="text" name="mal_acids">
+            </div>
+            <div class="form-group col-md-4" id="lactic_acids">
+                <label for="inputLacticAcids">Млечна киселина:</label>
+                <input class="form-control" type="text" name="lactic_acids">
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputSO2">SO2:</label>
+                <input class="form-control" type="text" name="SO2">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputO2">O2:</label>
+                <input class="form-control" type="text" name="O2">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputCO2">CO2:</label>
+                <input class="form-control" type="text" name="CO2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputNTU">NTU:</label>
+                <input class="form-control" type="text" name="NTU">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAA">Асимилируем азот:</label>
+                <input class="form-control" type="text" name="assim_nitrgen">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPectoTest">Пекто тест:</label>
+                <select class="form-control" name="pecto_test">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitbutton">Запамети</button>
+
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/helpers.js' %}"></script>
+<script type="text/javascript">
+    addNavigation('navbar')
+    $('#nav1').addClass('active')
+    $('#submitbutton').prop('disabled', true)
+
+    $("#assort, #assortyear").each(function () {
+        $(this).on('change', function () {
+            checkAll()
+        })
+    });
+
+    function checkAll() {
+        //add checkMandatory for new input
+        var err = 0
+        $("#assort, #assortyear").each(function () {
+            if (!checkMandatory($(this))) {
+                err++
+            }
+        })
+        if (err == 0) {
+            $('#submitbutton').prop('disabled', false)
+        } else {
+            $('#submitbutton').prop('disabled', true)
+        }
+    }
+
+</script>
+</body>
+</html>

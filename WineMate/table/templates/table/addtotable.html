@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    {% load static %}
+
+
+</head>
+<body>
+    <h1>Fill the form</h1>
+
+    <form action="{% url 'addtotable' %}" method="POST" class="px-3">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="inputCategory">Отдел:</label>
+            <select class="form-control w-50" name="category" id="sel1">
+                <option>-----</option>
+                <option>Изба</option>
+                <option>Мостри</option>
+                <option>Стабилизация</option>
+                <option>Високоалкохолни напитки</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inputAssortmentName">Асортимент:</label>
+                <input class="form-control" id="assort" type="text" placeholder="Bolgare Chardonnay" name="assortment_name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAssortmentYear">Година:</label>
+                <select class="form-control" name="year">
+                    <option>-----</option>
+                    {% for i in years %}
+                        <option>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputStage">Етап:</label>
+                <input class="form-control" type="text" name="stage">
+            </div>
+             <div class="form-group col-md-4">
+                <label for="inputNote">Забележка:</label>
+                <input class="form-control" type="text" name="note">
+            </div>
+            <div class="form-group col-md-4" id="numProtocol">
+                <label for="inputProtocol">№ Протокол:</label>
+                <input class="form-control" type="text" name="numProtocol">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4" id="batch">
+                <label for="inputBatch">Партида:</label>
+                <input class="form-control" type="text" name="batch">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAlcohol">Алкохол:</label>
+                <input class="form-control" type="text" name="alcohol">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputSugar">Захар:</label>
+                <input class="form-control" type="text" name="sugar">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputTK">Титруеми киселини:</label>
+                <input class="form-control" type="text" name="titr_acids">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPH">pH:</label>
+                <input class="form-control" type="text" name="pH">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputVolAcids">Летливи киселини:</label>
+                <input class="form-control" type="text" name="vol_acids">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputRelWeights">Относително тегло:</label>
+                <input class="form-control" type="text" name="rel_weight">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4" id="mal_acids">
+                <label for="inputMalWeights">Ябълчна киселина:</label>
+                <input class="form-control" type="text" name="mal_acids">
+            </div>
+            <div class="form-group col-md-4" id="lactic_acids">
+                <label for="inputLacticAcids">Млечна киселина:</label>
+                <input class="form-control" type="text" name="lactic_acids">
+            </div>
+            <div class="form-group col-md-4" id="total_ext">
+                <label for="inputTotalExtract">Общ екстракт:</label>
+                <input class="form-control" type="text" name="total_ext">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4" id="freesugar">
+                <label for="inputRelFreeSugar">Беззахарен екстракт:</label>
+                <input class="form-control" type="text" name="freesugar" value="???" READONLY id="freesugarinput">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputSO2">SO2:</label>
+                <input class="form-control" type="text" name="SO2">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputO2">O2:</label>
+                <input class="form-control" type="text" name="O2">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputCO2">CO2:</label>
+                <input class="form-control" type="text" name="CO2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputNTU">Fe:</label>
+                <input class="form-control" type="text" name="Fe">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputNTU">Cu:</label>
+                <input class="form-control" type="text" name="Cu">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputNTU">NTU:</label>
+                <input class="form-control" type="text" name="NTU">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAA">Асимилируем азот:</label>
+                <input class="form-control" type="text" name="assim_nitrgen">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPectoTest">Пекто тест:</label>
+                 <select class="form-control" name="pecto_test">
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                     <option>6</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4" id="IF">
+                <label for="inputIF">Индекс на филтруемост:</label>
+                <input class="form-control" type="text" name="index_of_filt">
+            </div>
+            <div class="form-group col-md-4" id="sowing">
+                <label for="inputSowing">Посявка:</label>
+                <input class="form-control" type="text" name="sowing">
+            </div>
+            <div class="form-group col-md-4" id="sorb_acid">
+                <label for="inputSorbAcid">Сорбинова киселина:</label>
+                <input class="form-control" type="text" name="sorb_acid">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputProtStab">Белтъчна стабилност:</label>
+                <input class="form-control" type="text" name="prot_stab">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputDelta">Критерий за качество:</label>
+                <input class="form-control" type="text" name="delta">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputColdStab">Стабилност на студ:</label>
+                <input class="form-control" type="text" name="cold_stab">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputH2O2">Стабилност на цвят:</label>
+                <input class="form-control" type="text" name="H2O2">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputScheme">Схема:</label>
+                <input class="form-control" type="text" name="scheme">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputOtherProc">Друг вид обработка:</label>
+                <input class="form-control" type="text" name="other_proc">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{% static 'js/create.js' %}"></script>
+</body>
+</html>
