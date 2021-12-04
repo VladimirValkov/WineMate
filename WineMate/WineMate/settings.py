@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 '49.12.215.254',
+'127.0.0.1',
 ]
 
 
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tables2',
-    'home'
+    'home',
+    'accounts'
 ]
 
 
