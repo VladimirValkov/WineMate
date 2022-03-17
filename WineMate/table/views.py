@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django_tables2.views import SingleTableView
 from django.shortcuts import render
 from table import helpers
+from accounts.decorators import writer_required, admin_required
+import json
+from django_tables2 import RequestConfig
+
 from django.urls import reverse
 from django.views import generic
 # from decimal import Decimal
@@ -13,11 +17,13 @@ from time import gmtime, strftime
 from .models import Main
 from .models import Assortment
 from .tables import MainTable, CellarTable
-from .forms import AddForm
+from .forms import MainForm
 
-
+@admin_required()
 def TableListView(request):
     table = MainTable(Main.objects.all())
+    RequestConfig(request).configure(table)
+
 
     return render(request, 'table/table.html', {
         "table": table,
@@ -27,7 +33,7 @@ def TableListView(request):
     # table_class = MainTable
     # template_name = 'table/table.html'
 
-
+@admin_required()
 def addtotable(request):
     if request.method == 'POST':
         category = request.POST['category']
@@ -101,7 +107,7 @@ def addtotable(request):
         return render(request, 'table/addtotable.html', context)
 
 
-
+@writer_required()
 def CellarView(request):
     if request.method == 'POST' and 'cellar_operation' in request.POST:
         assortment = request.POST['assortment_name']
@@ -127,8 +133,8 @@ def CellarView(request):
             Assortment(name=assortment, year=assortment_year).save()
 
         id_assortment = Assortment.objects.filter(name=assortment, year=assortment_year)[0].id
-       #TODO: id_vessel needs to be discused
-        post = Main(date=helpers.getNow(),id_category=1, id_assortment=id_assortment, id_vessel=1,
+        # TODO: id_vessel needs to be discused
+        post = Main(date=helpers.getNow(), id_category=1, id_assortment=id_assortment, id_vessel=1,
                     stage=stage, note=note, alcohol=alcohol, sugar=sugar, titr_acids=titr_acids,
                     ph=ph, vol_acids=vol_acids, rel_weight=rel_weight, mal_acids=mal_acids, lactic_acids=lactic_acids,
                     so2=so2, o2=o2, co2=co2, ntu=ntu, assim_nitrgen=assim_nitrgen,
@@ -137,10 +143,10 @@ def CellarView(request):
         post.save()
 
     table = CellarTable(Main.objects.raw('''SELECT a.id, a.`date`, a.`id_vessel`, CONCAT(b.`name`,' ', b.`year`) AS 'assort', a.`stage`, a.`note`, a.`alcohol`,
-    a.`sugar`, a.`titr_acids`, a.`pH`, a.`vol_acids`, a.`rel_weight`, a.`mal_acids`, a.`lactic_acids`, a.`SO2`, a.`O2`,
-    a.`CO2`, a.`NTU`, a.`assim_nitrgen`, a.`pecto_test`
-    FROM main a
-    LEFT JOIN assortment b ON a.id_assortment = b.id'''))
+       a.`sugar`, a.`titr_acids`, a.`pH`, a.`vol_acids`, a.`rel_weight`, a.`mal_acids`, a.`lactic_acids`, a.`SO2`, a.`O2`,
+       a.`CO2`, a.`NTU`, a.`assim_nitrgen`, a.`pecto_test`
+       FROM main a
+       LEFT JOIN assortment b ON a.id_assortment = b.id'''))
     return render(request, 'table/cellar.html', {
         "table": table,
         "years": range(1900, 2025),

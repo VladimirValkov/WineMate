@@ -1,4 +1,5 @@
 from time import gmtime, strftime
+from decimal import Decimal
 
 def checkFloats(field):
     try:
