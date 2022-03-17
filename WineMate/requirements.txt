@@ -36,4 +36,3 @@ twisted-iocpsupport==1.0.2
 typing-extensions==3.10.0.2
 w3lib==1.22.0
 zope.interface==5.4.0
-mysqlclient==2.0.3
