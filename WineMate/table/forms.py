@@ -3,16 +3,11 @@ from django import forms
 
 from table.models import Main
 
-class AddForm(ModelForm):
+class MainForm(ModelForm):
     class Meta:
         model = Main
-
         fields = '__all__'
 
     def clean(self):
-        super(AddForm, self).clean()
-
-        #category = self.cleaned_data.get('category')
-
-
+        super(MainForm, self).clean()
         return self.cleaned_data

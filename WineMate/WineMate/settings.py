@@ -25,11 +25,7 @@ SECRET_KEY = 'django-insecure-4au7+_06b^=m2i!lg=1%qyq+=#+n12dydmqr#j%9^zxp8!jjs1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-'49.12.215.254',
-'127.0.0.1',
-'winemate.4every.info',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -44,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_tables2',
     'home',
-    'accounts'
+    'accounts',
 ]
 
 
@@ -115,6 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+AUTH_USER_MODEL = 'accounts.User'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -131,8 +129,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_ROOT = "/home/teamppmg/project/WineMate/table/static"
 
 STATIC_URL = '/static/'
 

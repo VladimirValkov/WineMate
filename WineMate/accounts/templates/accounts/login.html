@@ -6,6 +6,12 @@
 </head>
 <body>
     <h3>Login</h3>
-    <a href="/home/">LOGIN</a>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" name="Create">
+    </form>
 </body>
 </html>
