@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4au7+_06b^=m2i!lg=1%qyq+=#+n12dydmqr#j%9^zxp8!jjs1
 DEBUG = True
 
 ALLOWED_HOSTS = [
-winemate.4every.info,
+'winemate.4every.info',
 ]
 
 
