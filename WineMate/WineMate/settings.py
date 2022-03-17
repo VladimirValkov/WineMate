@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-4au7+_06b^=m2i!lg=1%qyq+=#+n12dydmqr#j%9^zxp8!jjs1
 DEBUG = True
 
 ALLOWED_HOSTS = [
+'49.12.215.254',
+'127.0.0.1',
 'winemate.4every.info',
 ]
 
@@ -131,6 +133,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_ROOT = "/home/teamppmg/project/WineMate/table/static"
 
 STATIC_URL = '/static/'
 
